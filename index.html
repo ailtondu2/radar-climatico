@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#14261d">
+  <meta name="description" content="Previsão de temperaturas máximas e mínimas para municípios brasileiros.">
+  <title>Radar Climático</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">INTELIGÊNCIA CLIMÁTICA</p>
+        <h1>Radar Climático</h1>
+        <p class="subtitle">Consulte a previsão de temperaturas máximas e mínimas em municípios de todo o Brasil.</p>
+      </div>
+      <div class="status" id="updatedAt" aria-live="polite">Dados meteorológicos em tempo real</div>
+    </header>
+
+    <section class="filters" aria-label="Filtros da previsão">
+      <label>
+        <span>Estado</span>
+        <select id="stateSelect" disabled><option>Carregando estados…</option></select>
+      </label>
+      <label>
+        <span>Cidade</span>
+        <div class="search-select">
+          <input id="citySearch" type="search" placeholder="Busque uma cidade" autocomplete="off" disabled>
+          <select id="citySelect" size="6" disabled aria-label="Resultados de cidades"></select>
+        </div>
+      </label>
+      <label>
+        <span>Período</span>
+        <select id="periodSelect">
+          <option value="3">Próximos 3 dias</option>
+          <option value="7" selected>Próximos 7 dias</option>
+          <option value="10">Próximos 10 dias</option>
+          <option value="14">Próximos 14 dias</option>
+          <option value="16">Próximos 16 dias</option>
+        </select>
+      </label>
+    </section>
+
+    <p class="feedback" id="feedback" role="status" aria-live="polite">Selecione um estado e uma cidade para consultar a previsão.</p>
+
+    <section class="summary" id="summary" hidden>
+      <article><span>Maior máxima</span><strong id="peakMax">—</strong><small id="peakMaxDate"></small></article>
+      <article><span>Menor mínima</span><strong id="lowestMin">—</strong><small id="lowestMinDate"></small></article>
+      <article><span>Amplitude média</span><strong id="avgRange">—</strong><small>máxima − mínima</small></article>
+    </section>
+
+    <section class="chart-section" id="chartSection" hidden>
+      <div class="chart-heading">
+        <div>
+          <p class="eyebrow" id="locationLabel">PREVISÃO</p>
+          <h2>Temperaturas diárias</h2>
+        </div>
+        <div class="legend" aria-label="Legenda">
+          <button type="button" data-series="max" aria-pressed="true"><i class="max"></i>Máxima</button>
+          <button type="button" data-series="min" aria-pressed="true"><i class="min"></i>Mínima</button>
+        </div>
+      </div>
+      <div class="chart-wrap" id="chartWrap">
+        <svg id="temperatureChart" role="img" aria-labelledby="chartTitle chartDescription"></svg>
+        <div class="tooltip" id="tooltip" role="tooltip"></div>
+      </div>
+    </section>
+
+    <footer>Localidades: IBGE · Previsão meteorológica: Open-Meteo</footer>
+  </main>
+  <script src="./app.js" defer></script>
+</body>
+</html>
