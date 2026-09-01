@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#14261d">
-  <meta name="description" content="Previsão de temperaturas máximas e mínimas para municípios brasileiros.">
+  <meta name="description" content="Compare temperaturas máximas e mínimas entre municípios brasileiros.">
   <title>Radar Climático</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +17,7 @@
       <div>
         <p class="eyebrow">INTELIGÊNCIA CLIMÁTICA</p>
         <h1>Radar Climático</h1>
-        <p class="subtitle">Consulte a previsão de temperaturas máximas e mínimas em municípios de todo o Brasil.</p>
+        <p class="subtitle">Compare a previsão de temperaturas máximas e mínimas entre cidades de todo o Brasil.</p>
       </div>
       <div class="status" id="updatedAt" aria-live="polite">Dados meteorológicos em tempo real</div>
     </header>
@@ -28,9 +28,9 @@
         <select id="stateSelect" disabled><option>Carregando estados…</option></select>
       </label>
       <label>
-        <span>Cidade</span>
+        <span>Adicionar cidade</span>
         <div class="search-select">
-          <input id="citySearch" type="search" placeholder="Busque uma cidade" autocomplete="off" disabled>
+          <input id="citySearch" type="search" placeholder="Busque e selecione uma cidade" autocomplete="off" disabled>
           <select id="citySelect" size="6" disabled aria-label="Resultados de cidades"></select>
         </div>
       </label>
@@ -46,25 +46,27 @@
       </label>
     </section>
 
-    <p class="feedback" id="feedback" role="status" aria-live="polite">Selecione um estado e uma cidade para consultar a previsão.</p>
+    <div class="selected-cities" id="selectedCities" aria-label="Cidades selecionadas"></div>
+    <p class="feedback" id="feedback" role="status" aria-live="polite">Adicione até cinco cidades para comparar.</p>
 
     <section class="summary" id="summary" hidden>
       <article><span>Maior máxima</span><strong id="peakMax">—</strong><small id="peakMaxDate"></small></article>
       <article><span>Menor mínima</span><strong id="lowestMin">—</strong><small id="lowestMinDate"></small></article>
-      <article><span>Amplitude média</span><strong id="avgRange">—</strong><small>máxima − mínima</small></article>
+      <article><span>Amplitude média</span><strong id="avgRange">—</strong><small>todas as cidades</small></article>
     </section>
 
     <section class="chart-section" id="chartSection" hidden>
       <div class="chart-heading">
         <div>
-          <p class="eyebrow" id="locationLabel">PREVISÃO</p>
+          <p class="eyebrow" id="locationLabel">COMPARATIVO</p>
           <h2>Temperaturas diárias</h2>
         </div>
-        <div class="legend" aria-label="Legenda">
+        <div class="legend metric-legend" aria-label="Tipos de temperatura">
           <button type="button" data-series="max" aria-pressed="true"><i class="max"></i>Máxima</button>
           <button type="button" data-series="min" aria-pressed="true"><i class="min"></i>Mínima</button>
         </div>
       </div>
+      <div class="city-legend" id="cityLegend" aria-label="Cores das cidades"></div>
       <div class="chart-wrap" id="chartWrap">
         <svg id="temperatureChart" role="img" aria-labelledby="chartTitle chartDescription"></svg>
         <div class="tooltip" id="tooltip" role="tooltip"></div>
